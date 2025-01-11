@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intelligent Flood Detection and Alert System</title>
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #0d0d0d, #1c1c1c);
+            color: #f1f1f1;
+            overflow-x: hidden;
+        }
+
+        /* Header Section */
+        header {
+            background: linear-gradient(90deg, #FFD700, #FFB700);
+            padding: 20px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.5s ease;
+        }
+
+        header:hover {
+            background: linear-gradient(90deg, #FFC700, #FF9700);
+        }
+
+        header .header-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            animation: slideIn 1.2s ease-out;
+        }
+
+        header .header-container img {
+            width: 60px;
+            height: auto;
+            transition: transform 0.3s ease;
+        }
+
+        header .header-container img:hover {
+            transform: scale(1.2);
+        }
+
+        header .title-container {
+            text-align: center;
+            flex-grow: 1;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            color: #1a1a1a;
+            margin: 0;
+        }
+
+        nav {
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        nav a {
+            color: #1a1a1a;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #f1f1f1;
+        }
+
+        /* Section Styles */
+        section {
+            padding: 50px 10%;
+            margin: 30px auto;
+            border-radius: 12px;
+            background: #1f1f1f;
+            box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1.5s ease forwards;
+        }
+
+        section:nth-child(even) {
+            background: #2a2a2a;
+        }
+
+        section h2 {
+            font-size: 2rem;
+            color: #FFD700;
+            margin-bottom: 20px;
+            text-align: center;
+            border-bottom: 2px solid #FFD700;
+            display: inline-block;
+        }
+
+        section p, section ul {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: #dcdcdc;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        ul li {
+            margin-bottom: 15px;
+            position: relative;
+            padding-left: 25px;
+        }
+
+        ul li:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #FFD700;
+            font-size: 1.5rem;
+        }
+
+        /* Images and Videos */
+        .images-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .images-container img {
+            width: 280px;
+            border-radius: 10px;
+            box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.6);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 2px solid #FFD700;
+        }
+
+        .images-container img:hover {
+            transform: scale(1.1) rotate(2deg);
+            box-shadow: 0px 12px 20px rgba(0, 0, 0, 0.8);
+        }
+
+        .video-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .video-container iframe {
+            width: 100%;
+            max-width: 800px;
+            height: 450px;
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.6);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .video-container iframe:hover {
+            transform: scale(1.02);
+            box-shadow: 0px 12px 20px rgba(0, 0, 0, 0.8);
+        }
+
+        /* Footer Section */
+        footer {
+            background: linear-gradient(90deg, #FFD700, #FFB700);
+            color: #1a1a1a;
+            text-align: center;
+            padding: 20px;
+            margin-top: 30px;
+            box-shadow: 0px -4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideIn {
+            0% {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="header-container">
+            <img src="uitm-logo.png" alt="UiTM Logo">
+            <div class="title-container">
+                <h1>Intelligent Flood Detection and Alert System</h1>
+            </div>
+            <img src="toyohashi-logo.png" alt="Toyohashi University Logo">
+        </div>
+        <nav>
+            <a href="#abstract">Abstract</a>
+            <a href="#developer">Developer Info</a>
+            <a href="#methodology">Methodology</a>
+            <a href="#results">Results</a>
+            <a href="#video-demo">Video Demo</a>
+            <a href="#conclusion">Conclusion</a>
+        </nav>
+    </header>
+
+    <!-- Abstract Section -->
+    <section id="abstract">
+        <h2>Abstract</h2>
+        <p>
+            Floods have become one of the most destructive natural calamities that cause life, property, and infrastructural losses. This project, therefore, is an "Intelligent Flood Detection and Alert System" built on a network of sensors, integrated with Google Sheets for real-time data logging and monitoring. The key objective will be to ensure there is a reliable and efficient system for the detection of water-level rise and forecasting floods in due time, which gives an early warning for flood impacts. This system uses an ultrasonic sensor for measuring the level of water, rain sensors to measure rainfall, and a flow sensor to monitor water movements. These sensors are connected to a microcontroller, which uploads the real time data readings on Google Sheets through a Wi-Fi module. Google Sheets can act like a web-based data management system by allowing access to live monitoring data from anywhere and at any time. This allows for further analysis of data and observation of trends over time for enabling early flood warnings.The system is enhanced further with the Blynk IoT platform for notifications directly to a mobile device and allows remote water pump control to give flexibility in its on and off operation. The results show that the system effectively provides real-time monitoring of water level variation and other environmental conditions, which trigger the local alert mechanism  at a critical level. This provides increased access by users at an affordable and scalable measure; hence, it is deployable in flood-prone areas to support authorities and locals for better decision-making on time. This makes it a practical choice for both remote and urban applications due to the flexibility in data storage, remote control, and analysis added by the integration of Google Sheets and Blynk.
+
+        </p>
+    </section>
+
+    <!-- Developer Information Section -->
+    <section id="developer">
+        <h2>Developer Information</h2>
+        <p><strong>Name:</strong> Muhammad Amirul Naim</p>
+        <p><strong>Email:</strong> muhammadaiman060809@gmail.com</p>
+        <p><strong>University:</strong> Universiti Teknologi MARA (UiTM), Shah Alam</p>
+        <p><strong>Supervisor:</strong> Dr. Roshakimah Mohd Isa</p>
+    </section>
+
+    <!-- Methodology Section -->
+    <section id="methodology">
+        <h2>Methodology</h2>
+        <p>The system was built using the following methodology:</p>
+        <ul>
+            <li>Integration of IoT sensors for water level, rainfall, and flow monitoring.</li>
+            <li>Data logging and visualization via Google Sheets and Looker Studio.</li>
+            <li>Real-time alerts sent to users through the Blynk IoT platform.</li>
+            <li>Automatic water pump activation during critical flood levels.</li>
+        </ul>
+        <div class="images-container">
+            <img src="circuit-design.jpg" alt="Circuit Design">
+            <img src="dimension-frame-3d-design.jpg" alt="Dimension for Frame 3D Design">
+            <img src="iot-flowchart.jpg" alt="IoT Flowchart">
+            <img src="power-source-flowchart.jpg" alt="Power Source Flowchart">
+            <img src="prototype-3d-design.jpg" alt="Prototype 3D Design">
+            <img src="sensor-actuator-flowchart.jpg" alt="Sensor and Actuator Flowchart">
+            <img src="solar-panel-3d-design.jpg" alt="Solar Panel 3D Design">
+            <img src="frame-3d-design.jpg" alt="Frame 3D Design">
+            <img src="control-box-3d-design.jpg" alt="Control Box 3D Design">
+        </div>
+    </section>
+
+    <!-- Results Section -->
+    <section id="results">
+        <h2>Results</h2>
+        <p>
+            The system demonstrated efficient real-time flood monitoring and data logging.
+            Automated responses helped mitigate risks effectively.
+        </p>
+        <div class="images-container">
+            <img src="blynk-dashboard.jpg" alt="Blynk Dashboard">
+            <img src="google-sheets.jpg" alt="Google Sheets Logs">
+            <img src="prototype.jpg" alt="Prototype Picture">
+        </div>
+    </section>
+
+    <!-- Video Demonstration Section -->
+    <section id="video-demo">
+        <h2>Video Demonstration</h2>
+        <p>Watch the Intelligent Flood Detection and Alert System in action:</p>
+        <div class="video-container">
+            <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID" allowfullscreen></iframe>
+        </div>
+    </section>
+
+    <!-- Conclusion Section -->
+    <section id="conclusion">
+        <h2>Conclusion</h2>
+        <p>
+            The development of this project which is Intelligent flood detection and alert system achieved the targeted outcomes.Particularly surmounting difficulties associated with combining several sensors and output devices.It is proposed to develop a general flood detection and alarm system using the ESP32 microcontroller with integrated Wi-Fi interfaced with an Ultrasonic Sensor (HC-SR04), Rain Sensor, Water Flow Sensor, LED indicators and siren alerts, LCD I2C Display. Since this uses the Blynk technology that enables applications to run on mobile phones, the system can notify the people of flood-prone areas in real time. Also, with the logging of data through Google Sheets, sensor readings and warnings were kept in order to track and analyze data over time. This introduced more transparency and a reliable way of monitoring the functionality of the system.
+            Going forward, there are three areas that particularly need improvement. First, additional environmental sensors-such as temperature and humidity-could provide an even greater and more precise view of possible flooding, thereby increasing the system's effectiveness. It will also, while analyzing the data with the help of machine learning techniques, reduce false alarms and increase the detection rate, which would, on the whole, enhance its performance. Lastly, the incorporation of renewable energy sources or energy-efficient parts will increase the sustainability of the system, increasing its total life-time and reducing its adverse effects on the environment. In other words, these changes would make the system perform better: more precise, more reliable, and more environment-friendly.
+            
+        </p>
+    </section>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; 2025 Intelligent Flood Detection and Alert System. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>
